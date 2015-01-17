@@ -1,0 +1,36 @@
+{
+  "name": "sanitize",
+  "version": "0.0.1",
+  "description": "Input sanitizing library for node.js",
+  "main": "lib/sanitize.js",
+  "scripts": {
+    "test": "make test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/pocketly/node-sanitize"
+  },
+  "keywords": [
+    "sanitization",
+    "user input",
+    "input filtering"
+  ],
+  "author": "Adam Jaso <ajaso@pocketly.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pocketly/node-sanitize/issues"
+  },
+  "homepage": "https://github.com/pocketly/node-sanitize",
+  "publishConfig": {
+    "registry": "http://registry.npmjs.org"
+  },
+  "devDependencies": {
+    "mocha": "^2.1.0",
+    "should": "^4.6.0"
+  },
+  "dependencies": {
+    "lodash": "^2.4.1",
+    "sand": "^0.1.6",
+    "validator": "^3.27.0"
+  }
+}
