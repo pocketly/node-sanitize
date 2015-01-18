@@ -233,6 +233,28 @@ describe('sanitize.js', function() {
           type: 'string',
           value: null,
           expected: null
+        },
+
+        // json
+        {
+          type: 'json',
+          value: '{"id": 1, "name": "watson"}',
+          expected: {id: 1, name: 'watson'}
+        },
+        {
+          type: 'json',
+          value: '{',
+          expected: null
+        },
+        {
+          type: 'json',
+          value: null,
+          expected: null
+        },
+        {
+          type: 'json',
+          value: undefined,
+          expected: undefined
         }
       ];
 
