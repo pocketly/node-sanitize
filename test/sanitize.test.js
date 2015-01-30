@@ -432,6 +432,57 @@ describe('sanitize.js', function() {
 
   });
 
+  describe('sanitize.middleware', function() {
+
+    var req = {
+      query: {
+        name1: '2.1234',
+        name2: [
+          '2.1234',
+          '3.1234'
+        ],
+        name3: '123',
+        name4: 'asdf@asdf.com',
+        name5: 'abc1def2ghi3'
+      }
+    };
+
+    sanitize.middleware.mixinFilters(req);
+
+    it('should sanitize float numbers', function() {
+      (2.1234).should.be.eql(req.queryFloat('name1'));
+    });
+
+    it ('should sanitize float numbers with precision', function() {
+      (2.12).should.be.eql(req.queryFloat('name1', 2));
+    });
+
+    it ('should sanitize arrays of items', function() {
+      [2.1234, 3.1234].should.be.eql(req.queryArray('name2', 'float'));
+    });
+
+    it ('should sanitize arrays of items with an arg applied to each item', function() {
+      [2.12, 3.12].should.be.eql(req.queryArray('name2', 2, 'float'))
+    });
+
+    it ('should sanitize integer numbers', function() {
+      (123).should.be.eql(req.queryInt('name3'));
+    });
+
+    it ('should sanitize emails', function() {
+      ('asdf@asdf.com').should.be.eql(req.queryEmail('name4'));
+    });
+
+    it ('should sanitize strings', function() {
+      ('asdf@asdf.com').should.be.eql(req.queryString('name4'));
+    });
+
+    it('should sanitize patterns', function() {
+      ('abc1def2ghi3').should.be.eql(req.queryPattern('name5', /(\w{3}\d)+/))
+    });
+
+  });
+
   describe('sanitize.Sanitizer', function() {
 
     it('should support custom filters', function() {
