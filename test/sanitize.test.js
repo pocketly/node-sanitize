@@ -83,6 +83,11 @@ describe('sanitize.js', function() {
           expected: 1.1
         },
         {
+          type: 'flo',
+          value: ['1.123456', 2],
+          expected: 1.12
+        },
+        {
           type: 'float',
           value: null,
           expected: NaN
@@ -356,6 +361,49 @@ describe('sanitize.js', function() {
             }
           }
 
+        });
+
+      });
+
+    });
+
+    describe('array()', function() {
+
+      var tests = [
+        {
+          shouldBe: 'should validate an array of valid values',
+          expected: [1,2,3],
+          values: ['1','2','3'],
+          type: 'int'
+        },
+        {
+          shouldBe: 'should invalidate an array with at least one invalid value',
+          expected: null,
+          values: ['1',null,'3'],
+          type: 'int'
+        },
+        {
+          shouldBe: 'should invalidate an array with a NaN',
+          expected: null,
+          values: ['1',NaN,'3'],
+          type: 'int'
+        },
+        {
+          shouldBe: 'should invalidate an array with an undefined',
+          expected: null,
+          values: ['1',undefined,'3'],
+          type: 'int'
+        }
+      ];
+
+      _.each(tests, function(test) {
+
+        it(test.shouldBe, function() {
+          if (test.expected) {
+            test.expected.should.be.eql(sanitizer.array(test.values, test.type));
+          } else {
+            (test.expected === sanitizer.array(test.values, test.type)).should.be.ok;
+          }
         });
 
       });
