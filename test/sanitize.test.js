@@ -165,6 +165,26 @@ describe('sanitize.js', function() {
         },
         {
           type: 'url',
+          value: 'grooveshark.com/#!/search?q=funky+music',
+          expected: 'http://grooveshark.com/#!/search?q=funky+music'
+        },
+        {
+          type: 'url',
+          value: ['grooveshark.com/#!/search?q=funky+music', 'sftp'],
+          expected: 'sftp://grooveshark.com/#!/search?q=funky+music'
+        },
+        {
+          type: 'url',
+          value: ['sftp://grooveshark.com/#!/search?q=funky+music', 'sftp'],
+          expected: 'sftp://grooveshark.com/#!/search?q=funky+music'
+        },
+        {
+          type: 'url',
+          value: ['http://grooveshark.com/#!/search?q=funky+music', 'sftp'],
+          expected: null
+        },
+        {
+          type: 'url',
           value: '',
           expected: null
         },
