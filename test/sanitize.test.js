@@ -432,6 +432,20 @@ describe('sanitize.js', function() {
 
   });
 
+  describe('sanitize.my', function() {
+
+    it('should have aliases attached to it', function() {
+
+      sanitizer.my.int('1').should.eql(1);
+      sanitizer.my.str('asdf').should.eql('asdf');
+      (sanitizer.my.email('asdf') === null).should.be.ok;
+      sanitizer.my.regex('asdf', /asdf/i).should.eql('asdf');
+      sanitizer.my.flo(['1.2345', 2]).should.be.eql(1.23);
+
+    });
+
+  });
+
   describe('sanitize.middleware', function() {
 
     var req = {
