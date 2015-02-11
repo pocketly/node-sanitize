@@ -259,6 +259,11 @@ describe('sanitize.js', function() {
           value: null,
           expected: null
         },
+        {
+          type: 'string',
+          value: undefined,
+          expected: undefined
+        },
 
         // json
         {
@@ -438,6 +443,8 @@ describe('sanitize.js', function() {
 
       sanitizer.my.int('1').should.eql(1);
       sanitizer.my.str('asdf').should.eql('asdf');
+      (sanitizer.my.str(null) === null).should.be.ok;
+      (sanitizer.my.str(undefined) === undefined).should.be.ok;
       (sanitizer.my.email('asdf') === null).should.be.ok;
       sanitizer.my.regex('asdf', /asdf/i).should.eql('asdf');
       sanitizer.my.flo(['1.2345', 2]).should.be.eql(1.23);
