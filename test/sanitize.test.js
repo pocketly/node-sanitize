@@ -392,6 +392,19 @@ describe('sanitize.js', function() {
 
     });
 
+    describe('primitive()', function() {
+
+      it('should remove all non strings and numbers and convert booleans to 1 or 0', function() {
+
+        var sanitized = sanitizer.primitives({id: 1, name: 'Joe', age: undefined, gender: null, is_subscribed: true});
+        var expected = {id: 1, name: 'Joe', is_subscribed: 1};
+        sanitized.should.eql(expected);
+        sanitized.hasOwnProperty('age').should.not.be.ok;
+
+      });
+
+    });
+
     describe('array()', function() {
 
       var tests = [
