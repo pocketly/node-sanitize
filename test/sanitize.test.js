@@ -1,7 +1,9 @@
 /**
  * @author Adam Jaso <ajaso@pocketly.com>
  * @copyright 2015 Pocketly
- */ 
+ */
+
+"use strict";
 
 var _ = require('lodash');
 var sanitize = require('..');
@@ -521,13 +523,11 @@ describe('sanitize.js', function() {
 
     it('should support custom filters', function() {
 
-      var MySanitizer = sanitize.Sanitizer.extend({
-
-        customType: function(value) {
-          return value + '123456'
+      class MySanitizer extends sanitize.Sanitizer {
+        customType(value) {
+          return value + '123456';
         }
-
-      });
+      }
 
       var szr = new MySanitizer();
 
@@ -541,14 +541,12 @@ describe('sanitize.js', function() {
 
       var theValue = null;
 
-      var MySanitizer = sanitize.Sanitizer.extend({
-
-        integer: function(value) {
+      class MySanitizer extends sanitize.Sanitizer {
+        integer(value) {
           theValue = value;
-          return this.super(value);
+          return super.integer(value);
         }
-
-      });
+      }
 
       sanitize(MySanitizer).value(5, 'i').should.be.eql(theValue);
 
@@ -559,9 +557,14 @@ describe('sanitize.js', function() {
   describe('sanitize.Aliases', function() {
 
     it('should support custom aliases', function() {
-      var CustomAliases = sanitize.Aliases.extend({
-        inty: 'integer'
-      });
+
+      class CustomAliases extends sanitize.Aliases {
+        constructor() {
+          super();
+          this.inty = 'integer';
+        }
+      }
+
       var customAliases = new CustomAliases();
       var customSanitizer = new sanitize.Sanitizer(customAliases);
       var mySanitizer = sanitize(customSanitizer);

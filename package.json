@@ -29,8 +29,7 @@
     "should": "^4.6.0"
   },
   "dependencies": {
-    "lodash": "^2.4.1",
-    "sand": "^0.1.8",
-    "validator": "^3.27.0"
+    "lodash": "^3.5.0",
+    "validator": "^3.33.0"
   }
 }
