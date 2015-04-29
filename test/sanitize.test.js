@@ -286,6 +286,23 @@ describe('sanitize.js', function() {
           type: 'json',
           value: undefined,
           expected: undefined
+        },
+
+        // json
+        {
+          type: 'array',
+          value: [1,2,3],
+          expected: [1,2,3]
+        },
+        {
+          type: 'arr',
+          value: [1,2,3],
+          expected: [1,2,3]
+        },
+        {
+          type: 'arr',
+          value: '',
+          expected: null
         }
       ];
 
