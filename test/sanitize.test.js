@@ -288,7 +288,7 @@ describe('sanitize.js', function() {
           expected: undefined
         },
 
-        // json
+        // arrays
         {
           type: 'array',
           value: [1,2,3],
@@ -303,7 +303,24 @@ describe('sanitize.js', function() {
           type: 'arr',
           value: '',
           expected: null
-        }
+        },
+
+        // objects
+        {
+          type: 'obj',
+          value: new Date,
+          expected: new Date
+        },
+        {
+          type: 'pojo',
+          value: new Date,
+          expected: null
+        },
+        {
+          type: 'pojo',
+          value: {},
+          expected: {}
+        },
       ];
 
       _.each(tests, function(test) {
