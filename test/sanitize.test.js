@@ -19,10 +19,6 @@ describe('sanitize.js', function() {
     sanitize.Sanitizer.should.be.a.function;
   });
 
-  it('should have sanitize.Aliases', function() {
-    sanitize.Aliases.should.be.a.function;
-  });
-
   describe('sanitize()', function() {
 
     describe('value()', function() {
@@ -30,12 +26,12 @@ describe('sanitize.js', function() {
       var tests = [
         // booleans
         {
-          type: 'b',
+          type: 'bool',
           value: true,
           expected: true
         },
         {
-          type: 'b',
+          type: 'bool',
           value: false,
           expected: false
         },
@@ -47,7 +43,7 @@ describe('sanitize.js', function() {
 
         // integers
         {
-          type: 'i',
+          type: 'int',
           value: 1,
           expected: 1
         },
@@ -57,34 +53,34 @@ describe('sanitize.js', function() {
           expected: 1
         },
         {
-          type: 'integer',
+          type: 'int',
           value: undefined,
           expected: undefined
         },
         {
-          type: 'integer',
+          type: 'int',
           value: null,
           expected: NaN
         },
         {
-          type: 'i',
+          type: 'int',
           value: 'asdf',
           expected: NaN
         },
 
         // floats
         {
-          type: 'f',
+          type: 'float',
           value: 0.0,
           expected: 0.0
         },
         {
-          type: 'flo',
+          type: 'float',
           value: '1.1',
           expected: 1.1
         },
         {
-          type: 'flo',
+          type: 'float',
           value: ['1.123456', 2],
           expected: 1.12
         },
@@ -94,12 +90,12 @@ describe('sanitize.js', function() {
           expected: NaN
         },
         {
-          type: 'f',
+          type: 'float',
           value: undefined,
           expected: undefined
         },
         {
-          type: 'f',
+          type: 'float',
           value: 'a1asdf',
           expected: NaN
         },
@@ -246,22 +242,22 @@ describe('sanitize.js', function() {
 
         // strings
         {
-          type: 'string',
+          type: 'str',
           value: 'abcde',
           expected: 'abcde'
         },
         {
-          type: 'string',
+          type: 'str',
           value: 1,
           expected: '1'
         },
         {
-          type: 'string',
+          type: 'str',
           value: null,
           expected: null
         },
         {
-          type: 'string',
+          type: 'str',
           value: undefined,
           expected: undefined
         },
@@ -295,12 +291,12 @@ describe('sanitize.js', function() {
           expected: [1,2,3]
         },
         {
-          type: 'arr',
+          type: 'array',
           value: [1,2,3],
           expected: [1,2,3]
         },
         {
-          type: 'arr',
+          type: 'array',
           value: '',
           expected: null
         },
@@ -356,7 +352,7 @@ describe('sanitize.js', function() {
             email: 'test@test.com'
           },
           types: {
-            user_id: 'i',
+            user_id: 'int',
             password: 'str',
             email: 'email'
           }
@@ -487,15 +483,15 @@ describe('sanitize.js', function() {
 
   describe('sanitize.my', function() {
 
-    it('should have aliases attached to it', function() {
+    it('should have sanitizing functions directly attached to it', function() {
 
       sanitizer.my.int('1').should.eql(1);
       sanitizer.my.str('asdf').should.eql('asdf');
       (sanitizer.my.str(null) === null).should.be.ok;
-      (sanitizer.my.str(undefined) === undefined).should.be.ok;
+      (sanitizer.my.str(undefined) === undefined).should.not.be.ok;
       (sanitizer.my.email('asdf') === null).should.be.ok;
       sanitizer.my.regex('asdf', /asdf/i).should.eql('asdf');
-      sanitizer.my.flo(['1.2345', 2]).should.be.eql(1.23);
+      sanitizer.my.float(['1.2345', 2]).should.be.eql(1.23);
 
     });
 
@@ -575,38 +571,13 @@ describe('sanitize.js', function() {
       var theValue = null;
 
       class MySanitizer extends sanitize.Sanitizer {
-        integer(value) {
+        int(value) {
           theValue = value;
-          return super.integer(value);
+          return super.int(value);
         }
       }
 
-      sanitize(MySanitizer).value(5, 'i').should.be.eql(theValue);
-
-    });
-
-  });
-
-  describe('sanitize.Aliases', function() {
-
-    it('should support custom aliases', function() {
-
-      class CustomAliases extends sanitize.Aliases {
-        constructor() {
-          super();
-          this.inty = 'integer';
-        }
-      }
-
-      var customAliases = new CustomAliases();
-      var customSanitizer = new sanitize.Sanitizer(customAliases);
-      var mySanitizer = sanitize(customSanitizer);
-
-      mySanitizer.value('1', 'inty').should.be.eql(1);
-
-      (function() {
-        mySanitizer.value('1', 'intyy').should.be.eql(1);
-      }).should.throw();
+      sanitize(MySanitizer).value(5, 'int').should.be.eql(theValue);
 
     });
 
