@@ -261,6 +261,11 @@ describe('sanitize.js', function() {
           value: undefined,
           expected: undefined
         },
+        {
+          type: 'string',
+          value: Error,
+          expected: Error
+        },
 
         // json
         {
@@ -325,7 +330,7 @@ describe('sanitize.js', function() {
 
           if (Error === test.expected) {
             (function() {
-              sanitize.value(test.value, test.type);
+              sanitizer.value(test.value, test.type);
             }).should.throw();
           } else if (null !== test.expected && undefined !== test.expected) {
             test.expected.should.eql(sanitizer.value(test.value, test.type));
