@@ -31,5 +31,8 @@
   "dependencies": {
     "lodash": "^3.5.0",
     "validator": "^3.33.0"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org"
   }
 }
