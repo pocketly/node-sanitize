@@ -6,8 +6,14 @@ This library is for the purpose of sanitizing user input. The examples below sho
 
 # Install
 
-```javascript
+```bash
 npm install --save sanitize
+```
+
+# Test
+
+```bash
+npm test
 ```
 
 # Usage
