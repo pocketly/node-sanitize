@@ -43,21 +43,25 @@ This will remove all keys from a plain object that are not `String`, `Integer`, 
 ### req.headerFloat(headerName: String): Float
 ### req.headerEmail(headerName: String): String
 ### req.headerPattern(headerName: String, pattern: RegExp): String
+### req.headerOneOf(headerName: String, arr: Array): String
 
 ### req.bodyInt(bodyParam: String): Integer
 ### req.bodyString(bodyParam: String): String
 ### req.bodyFloat(bodyParam: String): Float
 ### req.bodyEmail(bodyParam: String): String
 ### req.bodyPattern(bodyParam: String, pattern: RegExp): String
+### req.boydOneOf(bodyName: String, arr: Array): String
 
 ### req.queryInt(queryParam: String): Integer
 ### req.queryString(queryParam: String): String
 ### req.queryFloat(queryParam: String): Float
 ### req.queryEmail(queryParam: String): String
 ### req.queryPattern(queryParam: String, pattern: RegExp): String
+### req.queryOneOf(queryName: String, arr: Array): String
 
 ### req.paramInt(paramName: String): Integer
 ### req.paramString(paramName: String): String
 ### req.paramFloat(paramName: String): Float
 ### req.paramEmail(paramName: String): String
 ### req.paramPattern(paramName: String, pattern: RegExp): String
+### req.paramOneOf(paramName: String, arr: Array): String

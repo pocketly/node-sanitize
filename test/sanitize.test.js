@@ -484,6 +484,44 @@ describe('sanitize.js', function() {
 
     });
 
+    describe('oneOf()', function() {
+
+      var tests = [
+        {
+          shouldBe: 'should validate a string if it is within finite list',
+          expected: 'abc',
+          value: 'abc',
+          arr: ['abc', 'def', 'ghi']
+        },
+        {
+          shouldBe: 'should invalidate a string if it is not within finite list',
+          expected: null,
+          value: 'jkl',
+          arr: ['abc', 'def', 'ghi']
+        },
+        {
+          shouldBe: 'should invalidate a string if finite list is not an array',
+          expected: null,
+          value: "456",
+          arr: "456"
+        }
+      ];
+
+      _.each(tests, function(test) {
+
+        it(test.shouldBe, function() {
+            console.log(sanitizer);
+          if (test.expected) {
+            test.expected.should.be.eql(sanitizer.my.oneOf(test.value, test.arr));
+          } else {
+            (test.expected === sanitizer.my.oneOf(test.value, test.arr)).should.be.ok;
+          }
+        });
+
+      });
+
+    });
+
   });
 
   describe('sanitize.my', function() {
@@ -497,6 +535,7 @@ describe('sanitize.js', function() {
       (sanitizer.my.email('asdf') === null).should.be.ok;
       sanitizer.my.regex('asdf', /asdf/i).should.eql('asdf');
       sanitizer.my.float(['1.2345', 2]).should.be.eql(1.23);
+      sanitizer.my.oneOf(2, [1, 2, 3]).should.be.eql(2);
 
     });
 
@@ -551,6 +590,9 @@ describe('sanitize.js', function() {
       ('abc1def2ghi3').should.be.eql(req.queryPattern('name5', /(\w{3}\d)+/))
     });
 
+    it('should sanitize one of', function() {
+      ('123').should.be.eql(req.queryOneOf('name3', ['123', '456']));
+    })
   });
 
   describe('sanitize.Sanitizer', function() {
