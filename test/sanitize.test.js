@@ -11,13 +11,6 @@ var sanitizer = sanitize();
 
 describe('sanitize.js', function() {
 
-  it('should have middleware', function() {
-    sanitize.middleware.should.be.a.function;
-  });
-
-  it('should have sanitize.Sanitizer', function() {
-    sanitize.Sanitizer.should.be.a.function;
-  });
 
   describe('sanitize()', function() {
 
@@ -565,7 +558,6 @@ describe('sanitize.js', function() {
 
       var szr = new MySanitizer();
 
-      szr.customType.should.be.a.function;
 
       sanitize(MySanitizer).value('abc', 'customType').should.be.eql('abc123456');
 
