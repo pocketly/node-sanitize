@@ -1,6 +1,6 @@
 {
   "name": "sanitize",
-  "version": "2.0.2",
+  "version": "2.1.0",
   "description": "Input sanitizing library for node.js",
   "main": "lib/sanitize.js",
   "scripts": {
@@ -29,7 +29,7 @@
     "should": "^4.6.0"
   },
   "dependencies": {
-    "lodash": "^3.5.0",
+    "lodash": "^4.17.0",
     "validator": "^3.33.0"
   }
 }
