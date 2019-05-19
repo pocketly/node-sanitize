@@ -50,7 +50,7 @@ This will remove all keys from a plain object that are not `String`, `Integer`, 
 ### req.bodyFloat(bodyParam: String): Float
 ### req.bodyEmail(bodyParam: String): String
 ### req.bodyPattern(bodyParam: String, pattern: RegExp): String
-### req.boydOneOf(bodyName: String, arr: Array): String
+### req.bodyOneOf(bodyName: String, arr: Array): String
 
 ### req.queryInt(queryParam: String): Integer
 ### req.queryString(queryParam: String): String
