@@ -1,6 +1,6 @@
 {
   "name": "sanitize",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "description": "Input sanitizing library for node.js",
   "main": "lib/sanitize.js",
   "scripts": {
@@ -25,11 +25,11 @@
     "registry": "https://registry.npmjs.org"
   },
   "devDependencies": {
-    "mocha": "^2.1.0",
+    "mocha": "^10.0.0",
     "should": "^4.6.0"
   },
   "dependencies": {
     "lodash": "^4.17.0",
-    "validator": "^3.33.0"
+    "validator": "^13.7.0"
   }
 }
