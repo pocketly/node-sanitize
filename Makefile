@@ -7,4 +7,12 @@ test:
 		$(TESTS) \
 		--bail
 
-.PHONY: test
+test-in-docker:
+	docker build \
+		-t node-sanitize-test:latest .
+	docker run --rm -it \
+		-v $(PWD):/src \
+		-w /src \
+		node-sanitize-test:latest
+
+.PHONY: test test-in-docker
