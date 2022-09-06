@@ -1,6 +1,6 @@
 {
   "name": "sanitize",
-  "version": "2.1.1",
+  "version": "2.1.2",
   "description": "Input sanitizing library for node.js",
   "main": "lib/sanitize.js",
   "scripts": {
